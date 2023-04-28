@@ -53,8 +53,6 @@ for (int i = 0; i < numberOfConferencesToAdd; i++)
     Console.WriteLine("Type the conference date (dd/mm/yyyy): ");
     string eventDate = Console.ReadLine();
 
-   
-
     Console.WriteLine("Type the conference speaker: ");
     string eventSpeaker = Console.ReadLine();
 
