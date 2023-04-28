@@ -10,7 +10,7 @@ namespace GestoreEventi
     public class EventProgram
     {
         private string title;
-        public List<Event> Events;
+        private List<Event> Events;
 
         public EventProgram(string title)
         {
@@ -59,9 +59,9 @@ namespace GestoreEventi
 
         public override string ToString()
         {
-            string eventProgramRappresentation = $"------------ {Title} ------------\n" +
+            string eventProgramRappresentation = $"------------------------ {Title.ToUpper()} ------------------------\n" +
             "\n" +
-            GetEventsRappresentation(Events);
+            GetEventsRappresentation(Events) + "\n";
 
             return eventProgramRappresentation;
         }

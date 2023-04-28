@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace events
+﻿namespace events
 {
     public class Event
     {
@@ -52,8 +46,9 @@ namespace events
                     throw new ArgumentException("Date already passed!");
                 }
                 return date;
-            } catch(Exception e) 
-            { 
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine(e.Message + " Insert a new date please (dd/mm/yyyy): ");
                 DateTime newDate = DateTime.Parse(Console.ReadLine());
                 return CheckDate(newDate);
@@ -62,7 +57,24 @@ namespace events
 
         public void BookSeats(int numberOfSeatsToBook)
         {
-            this.bookedSeats += numberOfSeatsToBook;
+            try
+            {
+                if ((this.bookedSeats += numberOfSeatsToBook) <= maxCapacity)
+                {
+                    this.bookedSeats += numberOfSeatsToBook;
+                }
+                else
+                {
+                    throw new ArgumentException("Overbooked!");
+                }
+            }
+            catch (Exception e)
+            {
+                int overBookedSeats = (this.bookedSeats += numberOfSeatsToBook) - this.maxCapacity;
+                this.bookedSeats = this.maxCapacity;
+                Console.WriteLine(e.Message + " Booked Seats are maxed out! " + this.bookedSeats + "/" + this.maxCapacity);
+                Console.WriteLine(overBookedSeats + " could not be booked");
+            }
         }
 
         public void CancelSeats(int numberOfSeatsToCancel)
@@ -72,7 +84,11 @@ namespace events
 
         public int FreeSeats()
         {
-            return this.maxCapacity - this.bookedSeats;
+            if (this.maxCapacity - this.bookedSeats >= 0)
+            {
+                return this.maxCapacity - this.bookedSeats;
+            }
+            return 0;
         }
 
         public override string ToString()
