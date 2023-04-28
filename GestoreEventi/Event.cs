@@ -70,6 +70,11 @@ namespace events
             this.bookedSeats -= numberOfSeatsToCancel;
         }
 
+        public int FreeSeats()
+        {
+            return this.maxCapacity - this.bookedSeats;
+        }
+
         public override string ToString()
         {
             string eventRappresentation = "\t" + Date.ToString("dd/MM/yyyy") + " - " + Title;
