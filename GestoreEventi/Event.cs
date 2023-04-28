@@ -55,7 +55,7 @@ namespace events
             } catch(Exception e) 
             { 
                 Console.WriteLine(e.Message + " Insert a new date please (dd/mm/yyyy): ");
-                DateTime? newDate = DateTime.Parse(Console.ReadLine());
+                DateTime newDate = DateTime.Parse(Console.ReadLine());
                 return CheckDate(newDate);
             }
         }
