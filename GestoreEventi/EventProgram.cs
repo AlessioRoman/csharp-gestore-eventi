@@ -39,7 +39,7 @@ namespace GestoreEventi
 
         public static string GetEventsRappresentation(List<Event> list)
         {
-            string listRappresentation = "------------ EVENTS ------------";
+            string listRappresentation = "------------------------ EVENTS ------------";
             foreach (Event e in list) 
             {
                 listRappresentation += "\n" + e.ToString();
