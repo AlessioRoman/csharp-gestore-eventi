@@ -11,23 +11,14 @@ namespace events
         private string title;
         private DateTime date;
         private readonly int maxCapacity;
-        private readonly int bookedSeats;
+        private int bookedSeats;
 
-        public Event(string title, string date, int maxCapacity, int bookedSeats)
+        public Event(string title, string date, int maxCapacity)
         {
             this.title = title;
+            this.date = CheckDate(DateTime.Parse(date));
             this.maxCapacity = maxCapacity;
-            Date = DateTime.Parse(date);
-            try
-            {
-                if (bookedSeats > maxCapacity)
-                {
-                    throw new ArgumentException("Number of booking above max Capacity!");
-                }
-            } catch (Exception e)
-            {
-                Console.WriteLine(e.Message + " " + e.TargetSite);
-            }
+            this.bookedSeats = 0;
         }
 
         public string Title
@@ -39,20 +30,7 @@ namespace events
         public DateTime Date
         {
             get { return date; }
-            set 
-            {
-                try
-                {
-                    if (value < DateTime.Today)
-                    {
-                        throw new ArgumentException("Date already passed!");
-                    }
-                    date = value;
-                } catch (Exception e)
-                {
-                    Console.WriteLine(e.Message + " " + e.TargetSite);
-                }
-            }
+            set { date = CheckDate(value); }
         }
 
         public int MaxCapacity
@@ -65,6 +43,39 @@ namespace events
             get { return bookedSeats; }
         }
 
+        public static DateTime CheckDate(DateTime date)
+        {
+            try
+            {
+                if (date < DateTime.Today)
+                {
+                    throw new ArgumentException("Date already passed!");
+                }
+                return date;
+            } catch(Exception e) 
+            { 
+                Console.WriteLine(e.Message + " Insert a new date please (dd/mm/yyyy): ");
+                DateTime? newDate = DateTime.Parse(Console.ReadLine());
+                return CheckDate(newDate);
+            }
+        }
+
+        public void BookSeats(int numberOfSeatsToBook)
+        {
+            this.bookedSeats += numberOfSeatsToBook;
+        }
+
+        public void CancelSeats(int numberOfSeatsToCancel)
+        {
+            this.bookedSeats -= numberOfSeatsToCancel;
+        }
+
+        public override string ToString()
+        {
+            string eventRappresentation = "\t" + Date.ToString("dd/MM/yyyy") + " - " + Title;
+
+            return eventRappresentation;
+        }
 
 
     }
