@@ -1,6 +1,9 @@
 ﻿using events;
+using GestoreEventi;
 using System.Reflection.Metadata.Ecma335;
+using System.Xml.Linq;
 
+/*
 Console.WriteLine("=========================== WELCOME ===========================");
 Console.WriteLine("Type the event name: ");
 string name = Console.ReadLine();
@@ -32,9 +35,15 @@ if (Selector(userChoice))
 }
 Console.WriteLine("Number of booked seats: " + newEvent.BookedSeats);
 Console.WriteLine("Number of free seats: " + newEvent.FreeSeats());
+*/
 
+Event newEvent = new("daw", "12/12/2025", 50);
+Event newEven2t = new("daw", "12/12/2025", 50);
 
-
+EventProgram newEventProgram = new("Title");
+newEventProgram.AddEventToList(newEvent);
+newEventProgram.AddEventToList(newEven2t);
+Console.WriteLine(newEventProgram.ToString());
 
 
 
@@ -47,6 +56,7 @@ Console.WriteLine("Number of free seats: " + newEvent.FreeSeats());
 
 // ========================== FUNCTIONS ==========================
 
+/*
 static bool Selector(char choice)
 {
     if (choice == 'y' || choice == 'Y')
@@ -57,3 +67,4 @@ static bool Selector(char choice)
         return false;
     }
 }
+*/
